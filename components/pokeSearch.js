@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, Picker } from "react-native";
+import { View, Text, Picker, FlatList, ActivityIndicator } from "react-native";
 import { Button } from "react-native"
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from "react-bootstrap/DropdownButton";
@@ -9,10 +9,11 @@ class PokeSearch extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            data: "q",
+            data: "",
             search: "",
             componentDidMount: false,
-            isLoading: true
+            isLoading: true,
+            planetsLoading: false
         }
 
     }
@@ -27,11 +28,15 @@ class PokeSearch extends React.Component {
             method: "GET"
         })
             .then((response) => response.json())
+            .then(this.setState({
+                planetsLoading: true
+            }))
             .then((responseJson) => {
                 console.log(responseJson);
                 this.setState({
                     data: responseJson,
-                    isLoading: false
+                    isLoading: false,
+                    planetsLoading: false
                 })
             })
             .catch((error) => {
@@ -71,9 +76,11 @@ class PokeSearch extends React.Component {
         } else {
             var names = null
         }
+
         if (!this.state.isLoading) {
             return (
                 <View>
+
                     <Text>
 
                     </Text>
@@ -91,14 +98,31 @@ class PokeSearch extends React.Component {
                         onChangeText={this.updateSearch}
                         value={search}
                     />
-                    <Text style={{ fontSize: 25, }}>{this.state.data.count}</Text>
+                    <Text style={{ fontSize: 25 }}>{this.state.data.count}</Text>
+                    <Text>{this.state.data.results.forEach(object => {
+                        return (
+                            <Text>{object.name}</Text>
+                        )
+                    })}</Text>
+
+                    <FlatList
+                        data={this.state.data.results}
+                        renderItem={({ item }) => <Text
+
+                            style={{ fontSize: 20 }}>{item.name}</Text>}></FlatList>
+
                     <View>{names}</View>
                 </View>
             )
         } else {
             return (
-                <View>
-                    <Text>LOADING!!</Text>
+                <View style={{
+                    flex: 1,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}>
+                    <ActivityIndicator style={{ margin: 0, fontSize: 25 }} />
+                    <Text style={{ marginTop: 15, fontSize: 20 }}>Loading...</Text>
                 </View>
             )
         }

@@ -16,11 +16,6 @@ export default function App() {
 
       <PokeSearch style={{ marginTop: 115, paddingTop: 50 }} />
 
-      <Picker style={{ height: 50, width: 100 }}>
-        <Picker.Item label="Grass" value="Cynthia" />
-        <Picker.Item label="Ronnie" value="Ronnie" />
-        <Picker.Item label="Juul" value="Juul" />
-      </Picker>
     </View>
   );
 }
