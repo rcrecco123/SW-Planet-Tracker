@@ -99,17 +99,18 @@ class PokeSearch extends React.Component {
                         value={search}
                     />
                     <Text style={{ fontSize: 25 }}>{this.state.data.count}</Text>
-                    <Text>{this.state.data.results.forEach(object => {
+                    {/* <Text>{this.state.data.results.forEach(object => {
                         return (
-                            <Text>{object.name}</Text>
+                            <Button onPress={() => { alert("sUp kiiDd") }} title={`${object.name}`}>{object.name}</Button>
                         )
-                    })}</Text>
+                    })}</Text> */}
 
                     <FlatList
                         data={this.state.data.results}
-                        renderItem={({ item }) => <Text
-
-                            style={{ fontSize: 20 }}>{item.name}</Text>}></FlatList>
+                        renderItem={({ item }) => <Button
+                            title={`${item.name}`}
+                            onPress={() => { alert('sup dude!') }}
+                            style={{ fontSize: 20 }}>{item.name}</Button>}></FlatList>
 
                     <View>{names}</View>
                 </View>
