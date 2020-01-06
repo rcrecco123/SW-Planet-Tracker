@@ -110,7 +110,7 @@ class PokeSearch extends React.Component {
                         data={this.state.data.results}
                         renderItem={({ item }) => <Button
                             title={`${item.name}`}
-                            onPress={() => this.props.navigation.navigate('Details')}
+                            onPress={() => this.props.navigation.navigate('Details', { planetName: item.name })}
                             // onPress={() => { alert('sup dude!') }}
                             style={{ fontSize: 20 }}>{item.name}</Button>}></FlatList>
 

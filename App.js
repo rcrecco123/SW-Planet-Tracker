@@ -20,7 +20,6 @@ export default class App extends React.Component {
   }
 }
 
-
 class PlanetShow extends React.Component {
   constructor(props) {
     super(props)
@@ -34,7 +33,7 @@ class PlanetShow extends React.Component {
   render() {
     return (
       <View>
-        <Text>Hello</Text>
+        <Text>{this.props.navigation.state.params.planetName}</Text>
       </View>
     )
   }
