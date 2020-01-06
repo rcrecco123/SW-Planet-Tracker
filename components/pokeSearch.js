@@ -4,6 +4,7 @@ import { Button } from "react-native"
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { SearchBar } from "react-native-elements";
+import { StackNavigator } from "react-navigation";
 
 class PokeSearch extends React.Component {
     constructor(props) {
@@ -109,7 +110,8 @@ class PokeSearch extends React.Component {
                         data={this.state.data.results}
                         renderItem={({ item }) => <Button
                             title={`${item.name}`}
-                            onPress={() => { alert('sup dude!') }}
+                            onPress={() => this.props.navigation.navigate('Details')}
+                            // onPress={() => { alert('sup dude!') }}
                             style={{ fontSize: 20 }}>{item.name}</Button>}></FlatList>
 
                     <View>{names}</View>

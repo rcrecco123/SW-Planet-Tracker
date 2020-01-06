@@ -5,26 +5,48 @@ import PokeSearch from "./components/pokeSearch";
 import DropdownButton from 'react-bootstrap'
 import { Picker } from "react-native"
 import { SearchBar } from "react-native-elements";
+import { TabRouter, StackRouter, create, createAppContainer } from "react-navigation";
+import { createStackNavigator } from 'react-navigation-stack';
 
 
 
-export default function App() {
 
-  return (
 
-    <View style={{ flex: 1, flexDirection: "column" }}>
+{/* <PokeSearch style={{ marginTop: 115, paddingTop: 50 }} /> */ }
 
-      <PokeSearch style={{ marginTop: 115, paddingTop: 50 }} />
-
-    </View>
-  );
+export default class App extends React.Component {
+  render() {
+    return <AppContainer />;
+  }
 }
 
 
+class PlanetShow extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      data: "",
+      componentDidMount: false,
+      isLoading: true,
+    }
+  }
 
+  render() {
+    return (
+      <View>
+        <Text>Hello</Text>
+      </View>
+    )
+  }
 
+}
 
+const PlanetStack = createStackNavigator({
+  Main: { screen: PokeSearch },
+  Details: { screen: PlanetShow }
+})
 
+const AppContainer = createAppContainer(PlanetStack);
 
 const styles = StyleSheet.create({
   container: {
