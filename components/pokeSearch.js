@@ -47,21 +47,25 @@ class PokeSearch extends React.Component {
         this.setState({ componentDidMount: true })
     }
 
-    componentDidUpdate() {
-        fetch(`https://swapi.co/api/planets/?search=${this.state.search}`, {
-            method: "GET"
-        })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                console.log(responseJson);
-                this.setState({
-                    data: responseJson,
-                    isLoading: false
+    componentDidUpdate(prevProps, prevState) {
+        // this.state.isLoading = false;
+        if (this.state.search != prevState.search) {
+            fetch(`https://swapi.co/api/planets/?search=${this.state.search}`, {
+                method: "GET"
+            })
+                .then((response) => response.json())
+                .then((responseJson) => {
+                    console.log(responseJson);
+                    this.setState({
+                        data: responseJson,
+                        isLoading: false
+                    })
                 })
-            })
-            .catch((error) => {
-                console.error(error);
-            })
+                .catch((error) => {
+                    console.error(error);
+                })
+        }
+        // this.state.isLoading = true;
     }
 
 
@@ -80,26 +84,15 @@ class PokeSearch extends React.Component {
 
         if (!this.state.isLoading) {
             return (
-                <View>
+                <View style={{ backgroundColor: 'gray', height: "100%" }}>
 
-                    <Text>
-
-                    </Text>
-                    <Text>
-
-                    </Text>
-                    <Text>
-
-                    </Text>
-                    <Text>
-                    </Text>
                     <SearchBar
                         platform="ios"
                         placeholder="Type here..."
                         onChangeText={this.updateSearch}
                         value={search}
                     />
-                    <Text style={{ fontSize: 25 }}>{this.state.data.count}</Text>
+                    <Text style={{ padding: 10, marginBottom: 1, textAlign: "center", fontSize: 25 }}>{this.state.data.count} results</Text>
                     {/* <Text>{this.state.data.results.forEach(object => {
                         return (
                             <Button onPress={() => { alert("sUp kiiDd") }} title={`${object.name}`}>{object.name}</Button>
@@ -108,13 +101,19 @@ class PokeSearch extends React.Component {
 
                     <FlatList
                         data={this.state.data.results}
-                        renderItem={({ item }) => <Button
-                            title={`${item.name}`}
-                            onPress={() => this.props.navigation.navigate('Details', { planetName: item.name })}
-                            // onPress={() => { alert('sup dude!') }}
-                            style={{ fontSize: 20 }}>{item.name}</Button>}></FlatList>
+                        renderItem={({ item }) =>
+                            <View style={{ fontSize: 20, backgroundColor: 'grey', color: "grey" }}>
+                                <Button
+                                    color="blue"
+                                    title={`${item.name}`}
+                                    onPress={() => this.props.navigation.navigate('Details', { planetName: item.name, planetData: item })}
+                                    // onPress={() => { alert('sup dude!') }}
+                                    style={{ fontSize: 20, backgroundColor: 'black', color: "black" }}>{item.name}</Button>
+                            </View>}>
 
-                    <View>{names}</View>
+                    </FlatList>
+
+                    <View style={{ color: "black" }}>{names}</View>
                 </View>
             )
         } else {
@@ -123,8 +122,9 @@ class PokeSearch extends React.Component {
                     flex: 1,
                     alignItems: 'center',
                     justifyContent: 'center',
+                    backgroundColor: 'gray'
                 }}>
-                    <ActivityIndicator style={{ margin: 0, fontSize: 25 }} />
+                    <ActivityIndicator style={{ margin: 0, fontSize: 25, color: "black" }} />
                     <Text style={{ marginTop: 15, fontSize: 20 }}>Loading...</Text>
                 </View>
             )
