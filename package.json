@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "expo": "^35.0.0",
+    "firebase": "^7.6.2",
+    "native-base": "^2.13.8",
     "popper.js": "^1.16.0",
     "react": "16.8.3",
     "react-bootstrap": "^1.0.0-beta.14",

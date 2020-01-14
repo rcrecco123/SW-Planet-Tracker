@@ -1,12 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from "react-native"
-import PokeSearch from "./components/pokeSearch";
+import Main from "./components/main";
 import DropdownButton from 'react-bootstrap'
 import { Picker } from "react-native"
 import { SearchBar } from "react-native-elements";
 import { TabRouter, StackRouter, create, createAppContainer } from "react-navigation";
 import { createStackNavigator } from 'react-navigation-stack';
+import Login from "./components/loginScreen";
 
 
 
@@ -47,7 +48,8 @@ class PlanetShow extends React.Component {
 }
 
 const PlanetStack = createStackNavigator({
-  Main: { screen: PokeSearch },
+  Login: { screen: Login },
+  Main: { screen: Main },
   Details: { screen: PlanetShow }
 })
 

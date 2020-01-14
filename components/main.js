@@ -6,7 +6,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import { SearchBar } from "react-native-elements";
 import { StackNavigator } from "react-navigation";
 
-class PokeSearch extends React.Component {
+class Main extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -101,9 +101,13 @@ class PokeSearch extends React.Component {
 
                     <FlatList
                         data={this.state.data.results}
+                        keyExtractor={(item, index) => { item.name }}
                         renderItem={({ item }) =>
-                            <View style={{ fontSize: 20, backgroundColor: 'grey', color: "grey" }}>
+                            <View
+                                key={item.name + "view"}
+                                style={{ fontSize: 20, backgroundColor: 'grey', color: "grey" }}>
                                 <Button
+                                    key={item.name + "button"}
                                     color="blue"
                                     title={`${item.name}`}
                                     onPress={() => this.props.navigation.navigate('Details', { planetName: item.name, planetData: item })}
@@ -134,4 +138,4 @@ class PokeSearch extends React.Component {
 
 }
 
-export default PokeSearch;
+export default Main;
