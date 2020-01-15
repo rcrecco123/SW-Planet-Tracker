@@ -22,7 +22,7 @@ export default class Login extends React.Component {
             firebase.auth().signInWithEmailAndPassword(email, password)
                 .then(res => {
                     console.log(res.user.email)
-                })
+                }).then(() => this.props.navigation.navigate('Main'))
         }
 
         catch (error) {
@@ -39,7 +39,8 @@ export default class Login extends React.Component {
                 alert("Please enter at least 6 characters")
                 return;
             }
-            firebase.auth().createUserWithEmailAndPassword(email, password);
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then(() => this.props.navigation.navigate('Main'))
         }
 
         catch (error) {
