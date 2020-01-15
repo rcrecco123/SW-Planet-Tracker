@@ -8,12 +8,9 @@ import { SearchBar } from "react-native-elements";
 import { TabRouter, StackRouter, create, createAppContainer } from "react-navigation";
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation-stack';
 import Login from "./components/loginScreen";
-import * as firebaseR from "firebase";
-import ApiKeys from "./constants/apiKeys";
-import AuthLoadingScreen from "./components/AuthLoadingScreen";
+import * as firebase from "firebase";;
 
-
-let firebaseConfig = {
+var firebaseConfig = {
   apiKey: "AIzaSyDaqnsuObn12NhkKMbR5psI4_0luDcznoE",
   authDomain: "star-wars-planet-tracker.firebaseapp.com",
   databaseURL: "https://star-wars-planet-tracker.firebaseio.com",
@@ -24,10 +21,10 @@ let firebaseConfig = {
   measurementId: "G-6VD1RWTRDG"
 }
 
-
-firebaseR.initializeApp(firebaseConfig)
+firebase.initializeApp(firebaseConfig);
 
 {/* <PokeSearch style={{ marginTop: 115, paddingTop: 50 }} /> */ }
+
 
 export default class App extends React.Component {
 
@@ -39,9 +36,23 @@ export default class App extends React.Component {
     }
 
 
+
   }
 
-
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (!user) {
+        this.props.navigation.navigate('Login', { planetName: item.name, planetData: item })
+      }
+    });
+  }
+  componentDidUpdate() {
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (!user) {
+        this.props.navigation.navigate('Login', { planetName: item.name, planetData: item })
+      }
+    });
+  }
 
   render() {
     return <AppContainer />;
@@ -74,7 +85,6 @@ class PlanetShow extends React.Component {
 
 }
 
-
 const PlanetStack = createStackNavigator({
   Login: { screen: Login },
   Main: { screen: Main },
@@ -82,6 +92,7 @@ const PlanetStack = createStackNavigator({
 })
 
 const AppContainer = createAppContainer(PlanetStack);
+
 
 const styles = StyleSheet.create({
   container: {
@@ -91,3 +102,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+

@@ -1,6 +1,7 @@
 import React from "react";
 import { Text } from "react-native";
 import { Container, Item, Form, Input, Button, Label } from "native-base";
+import * as firebase from "firebase";
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -10,9 +11,25 @@ export default class Login extends React.Component {
             email: "",
             password: ""
         })
+
+        this.loginUser = this.loginUser.bind(this);
+        this.signUp = this.signUp.bind(this);
+
     }
 
     loginUser(email, password) {
+        try {
+            firebase.auth().signInWithEmailAndPassword(email, password)
+                .then(res => {
+                    console.log(res.user.email)
+                })
+        }
+
+        catch (error) {
+            console.log(error.toString());
+        }
+
+        this.props.navigation.navigate('Main');
 
     }
 
@@ -35,6 +52,8 @@ export default class Login extends React.Component {
         return (
 
             <Container>
+                <Text style={{ textAlign: "center", padding: 15, fontSize: 65 }}>Star Wars Planet Tracker</Text>
+                <Text style={{ textAlign: "center", fontSize: 20, paddingTop: 10 }}>Galaxy Compendium</Text>
                 <Form>
                     <Item floatingLabel>
                         <Label>Email</Label>
