@@ -5,6 +5,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { SearchBar } from "react-native-elements";
 import { StackNavigator } from "react-navigation";
+import * as firebase from 'firebase';
 
 class Main extends React.Component {
     constructor(props) {
@@ -82,10 +83,11 @@ class Main extends React.Component {
             var names = null
         }
 
+
         if (!this.state.isLoading) {
             return (
                 <View style={{ backgroundColor: 'gray', height: "100%" }}>
-
+                    <Text style={{ textAlign: "center" }}>Welcome {firebase.auth().currentUser.email}</Text>
                     <SearchBar
                         platform="ios"
                         placeholder="Type here..."

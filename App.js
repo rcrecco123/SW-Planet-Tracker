@@ -22,9 +22,32 @@ var firebaseConfig = {
 }
 
 firebase.initializeApp(firebaseConfig);
+// firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 
 {/* <PokeSearch style={{ marginTop: 115, paddingTop: 50 }} /> */ }
 
+// firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+//   .then(function () {
+//     // Existing and future Auth states are now persisted in the current
+//     // session only. Closing the window would clear any existing state even
+//     // if a user forgets to sign out.
+//     // ...
+//     // New sign-in will be persisted with session persistence.
+//     return firebase.auth().signInWithEmailAndPassword(email, password);
+//   })
+//   .catch(function (error) {
+//     // Handle Errors here.
+//     var errorCode = error.code;
+//     var errorMessage = error.message;
+//   });
+
+firebase.auth().onAuthStateChanged(function (user) {
+  if (!user) {
+    () => this.props.navigation.navigate('Login', { planetName: item.name, planetData: item })
+  } else {
+    () => this.props.navigation.navigate('Main');
+  }
+});
 
 export default class App extends React.Component {
 
@@ -40,18 +63,16 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    firebase.auth().onAuthStateChanged(function (user) {
-      if (!user) {
-        this.props.navigation.navigate('Login', { planetName: item.name, planetData: item })
-      }
-    });
+
+    if (firebase.auth().currentUser) {
+      () => this.props.navigation.navigate("Main")
+    } else {
+      () => this.props.navigation.navigate("login")
+    }
+
   }
   componentDidUpdate() {
-    firebase.auth().onAuthStateChanged(function (user) {
-      if (!user) {
-        this.props.navigation.navigate('Login', { planetName: item.name, planetData: item })
-      }
-    });
+
   }
 
   render() {
