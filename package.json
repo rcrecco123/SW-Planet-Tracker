@@ -10,6 +10,7 @@
   "dependencies": {
     "expo": "^35.0.0",
     "firebase": "^7.6.2",
+    "firebase-admin": "^8.9.1",
     "native-base": "^2.13.8",
     "popper.js": "^1.16.0",
     "react": "16.8.3",

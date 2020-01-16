@@ -63,6 +63,10 @@ export default class App extends React.Component {
 
   }
 
+  componentWillMount() {
+
+  }
+
   componentDidMount() {
 
     // if (firebase.auth().currentUser) {
@@ -84,8 +88,8 @@ export default class App extends React.Component {
 
 
 const PlanetStack = createStackNavigator({
-  Login: { screen: Login },
   Main: { screen: Main },
+  Login: { screen: Login },
   Details: { screen: PlanetShow }
 })
 

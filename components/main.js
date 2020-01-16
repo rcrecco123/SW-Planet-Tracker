@@ -131,7 +131,7 @@ class Main extends React.Component {
                     backgroundColor: 'gray'
                 }}>
                     <ActivityIndicator style={{ margin: 0, fontSize: 25, color: "black" }} />
-                    <Text style={{ marginTop: 15, fontSize: 20 }}>Loading...</Text>
+                    <Text style={{ marginTop: 15, fontSize: 20 }}>Galaxy uploading...</Text>
                 </View>
             )
         }
