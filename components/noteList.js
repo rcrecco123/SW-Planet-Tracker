@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native'
+import { Text, View, ScrollView } from 'react-native'
 import * as firebase from 'firebase';
 
 export default class NoteList extends React.Component {
@@ -22,8 +22,21 @@ export default class NoteList extends React.Component {
 
 
         planetNoteRef.on('value', (snapshot) => {
+
+            let newVal = snapshot.exportVal();
+
+            let newObj = {};
+
+            this.state.noteList = [];
+
+            Object.keys(newVal).forEach((key) => {
+                if (newVal[key].planetId == this.props.planetName && !this.state.noteList.includes(newVal[key])) {
+                    this.state.noteList.push(newVal[key])
+                }
+            })
+
             this.setState({
-                noteList: snapshot.exportVal()
+                noteList: this.state.noteList,
             })
         })
     }
@@ -34,27 +47,19 @@ export default class NoteList extends React.Component {
 
     render() {
 
-
-
-        // let planetNoteRef = firebase.database().ref(`/users/${firebase.auth().currentUser.email.replace('.', '')}/notes`)
-        // debugger
-
-
-        // planetNoteRef.on('value', (snapshot) => {
-        //     snapshot.forEach((note) => {
-        //         if (note.planetId == this.props.planetName) {
-        //             this.state.noteList.push(note)
-        //             debugger
-        //             console.log(note)
-        //         }
-        //     })
-        // })
-
+        let noteListComp = this.state.noteList.map((obj) => {
+            return (
+                <View>
+                    <Text style={{ textAlign: 'center', width: '100%', borderRadius: 1, paddingBottom: 10 }}>{firebase.auth().currentUser.email}</Text>
+                    <Text style={{ fontSize: 15 }}>{obj.note}</Text>
+                </View>
+            )
+        })
 
         return (
-            <View>
-
-            </View>
+            <ScrollView>
+                {noteListComp}
+            </ScrollView>
         )
     }
 

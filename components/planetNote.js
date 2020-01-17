@@ -22,7 +22,8 @@ export default class PlanetNote extends React.Component {
             [this.state.noteName]: {
                 planetId: this.props.planetName,
                 authorId: firebase.auth().currentUser.uid,
-                note: this.state.note
+                note: this.state.note,
+                authorEmail: firebase.auth().currentUser.email
             }
         })
     }
