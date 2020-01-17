@@ -1,11 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Button } from "react-native"
 import Main from "./components/main";
-import DropdownButton from 'react-bootstrap'
-import { Picker } from "react-native"
-import { SearchBar } from "react-native-elements";
-import { TabRouter, StackRouter, create, createAppContainer } from "react-navigation";
+import { createAppContainer } from "react-navigation";
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation-stack';
 import Login from "./components/loginScreen";
 import * as firebase from "firebase";
@@ -40,7 +35,6 @@ export default class App extends React.Component {
     this.state = {
       isLoadingComplete: false,
     }
-
   }
 
   componentWillMount() {
@@ -53,8 +47,8 @@ export default class App extends React.Component {
 
   componentDidMount() {
 
-
   }
+
   componentDidUpdate() {
 
   }
@@ -64,8 +58,6 @@ export default class App extends React.Component {
   }
 }
 
-
-
 const PlanetStack = createStackNavigator({
   Main: { screen: Main },
   Login: { screen: Login },
@@ -74,13 +66,4 @@ const PlanetStack = createStackNavigator({
 
 const AppContainer = createAppContainer(PlanetStack);
 
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 

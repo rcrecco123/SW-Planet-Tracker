@@ -96,8 +96,6 @@ export default class Login extends React.Component {
                     </Button>
                 </Form>
             </Container>
-
         )
     }
-
 }

@@ -9,29 +9,22 @@ export default class PlanetNote extends React.Component {
 
         this.state = {
             note: "",
+            noteName: "",
             planetId: props.planetId
         }
     }
 
 
     addNote() {
-        let db = firebase.database();
-        let ref = db.ref();
-        let rootRef = ref.child('users');
+        var specificRef = firebase.database().ref(`users/${firebase.auth().currentUser.email.toString().replace('.', '')}/notes`);
 
-        var pushNotes = rootRef.child('notes')
-
-        var specificRef = firebase.database().ref('star-wars-planet-tracker/users/notes');
-
-        userRef.update({
-
-            []: {
+        specificRef.update({
+            [this.state.noteName]: {
                 planetId: this.props.planetName,
                 authorId: firebase.auth().currentUser.uid,
                 note: this.state.note
             }
         })
-
     }
 
     componentDidMount() {
@@ -41,6 +34,13 @@ export default class PlanetNote extends React.Component {
     render() {
         return (
             <View>
+                <TextInput placeholder={"note title"}
+                    onChangeText={(input) => {
+                        this.setState({
+                            noteName: input.toString()
+                        })
+                    }}
+                />
                 <TextInput placeholder={"type a note!"}
                     onChangeText={(input) => {
                         this.setState({
@@ -53,19 +53,7 @@ export default class PlanetNote extends React.Component {
                 <Button
                     title="submit note"
                     onPress={() => this.addNote()} />
-
             </View>
         )
     }
-
 }
-
-
-
-
-// curl - X PUT - d '{
-// "alanisawesome": {
-//     "name": "Alan Turing",
-//         "birthday": "June 23, 1912"
-// }
-// }' 'https://star-wars-planet-tracker.firebaseio.com/'
