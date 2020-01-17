@@ -3,37 +3,39 @@ import { View, Text, Button } from "react-native";
 import { TextInput } from "react-native";
 import * as firebase from "firebase";
 
-var firebaseConfig = {
-    apiKey: "AIzaSyDaqnsuObn12NhkKMbR5psI4_0luDcznoE",
-    authDomain: "star-wars-planet-tracker.firebaseapp.com",
-    databaseURL: "https://star-wars-planet-tracker.firebaseio.com",
-    projectId: "star-wars-planet-tracker",
-    storageBucket: "star-wars-planet-tracker.appspot.com",
-    messagingSenderId: "773485175703",
-    appId: "1:773485175703:web:122f7edbb11992ee779ad2",
-    measurementId: "G-6VD1RWTRDG"
-}
-
-
-
-
 export default class PlanetNote extends React.Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            note: ""
+            note: "",
+            planetId: props.planetId
         }
     }
 
 
     addNote() {
-        notes.push({
-            note: this.state.note
+        let db = firebase.database();
+        let ref = db.ref();
+        let rootRef = ref.child('users');
+
+        var pushNotes = rootRef.child('notes')
+
+        var specificRef = firebase.database().ref('star-wars-planet-tracker/users/notes');
+
+        userRef.update({
+
+            []: {
+                planetId: this.props.planetName,
+                authorId: firebase.auth().currentUser.uid,
+                note: this.state.note
+            }
         })
+
     }
+
     componentDidMount() {
-        this.state.usersNotes = firebase.database().ref("users/planets/notes");
+
     }
 
     render() {
@@ -50,19 +52,7 @@ export default class PlanetNote extends React.Component {
                     multiline={true} />
                 <Button
                     title="submit note"
-                    onPress={() => {
-                        fetch('https://star-wars-planet-tracker.firebaseio.com/notes/', {
-                            method: 'PUT',
-                            headers: {
-                                Accept: 'application/json',
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({
-                                firstParam: 'yourValue',
-                                secondParam: 'yourOtherValue',
-                            }),
-                        })
-                    }} />
+                    onPress={() => this.addNote()} />
 
             </View>
         )

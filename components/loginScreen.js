@@ -40,12 +40,26 @@ export default class Login extends React.Component {
                 return;
             }
             firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then(() => this.submitDbInfo())
                 .then(() => this.props.navigation.navigate('Main'))
         }
 
         catch (error) {
             console.log(error.toString());
         }
+    }
+
+    submitDbInfo() {
+        let db = firebase.database();
+        let ref = db.ref();
+        let userRef = ref.child('users');
+        let name = "fun";
+
+        userRef.update({
+            [this.state.email.replace('.', '')]: {
+                id: firebase.auth().currentUser.uid
+            }
+        })
     }
 
 

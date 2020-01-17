@@ -95,11 +95,6 @@ class Main extends React.Component {
                         value={search}
                     />
                     <Text style={{ padding: 10, marginBottom: 1, textAlign: "center", fontSize: 25 }}>{this.state.data.count} results</Text>
-                    {/* <Text>{this.state.data.results.forEach(object => {
-                        return (
-                            <Button onPress={() => { alert("sUp kiiDd") }} title={`${object.name}`}>{object.name}</Button>
-                        )
-                    })}</Text> */}
 
                     <FlatList
                         data={this.state.data.results}
@@ -113,7 +108,6 @@ class Main extends React.Component {
                                     color="blue"
                                     title={`${item.name}`}
                                     onPress={() => this.props.navigation.navigate('Details', { planetName: item.name, planetData: item })}
-                                    // onPress={() => { alert('sup dude!') }}
                                     style={{ fontSize: 20, backgroundColor: 'black', color: "black" }}>{item.name}</Button>
                             </View>}>
 

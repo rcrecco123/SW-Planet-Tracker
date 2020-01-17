@@ -24,7 +24,7 @@ export default class PlanetShow extends React.Component {
                 <Text style={{ padding: 10, fontSize: 20 }}>Rotation Period: {this.props.navigation.state.params.planetData.rotation_period}</Text>
                 <Text style={{ padding: 10, fontSize: 20 }}>Surface Water: {this.props.navigation.state.params.planetData.surface_water}</Text>
                 <Text style={{ padding: 10, fontSize: 20 }}>Terrain: {this.props.navigation.state.params.planetData.terrain}</Text>
-                <PlanetNote />
+                <PlanetNote planetName={this.props.navigation.state.params.planetName} />
             </View>
         )
     }
