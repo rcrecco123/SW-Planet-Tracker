@@ -13,32 +13,28 @@ export default class NoteList extends React.Component {
     }
 
     componentDidMount() {
-
-    }
-
-    componentWillMount() {
         let planetNoteRef = firebase.database().ref(`/users/${firebase.auth().currentUser.email.replace('.', '')}/notes`)
-        debugger
-
 
         planetNoteRef.on('value', (snapshot) => {
 
             let newVal = snapshot.exportVal();
-
-            let newObj = {};
-
+            let tempNoteList = []
             this.state.noteList = [];
 
             Object.keys(newVal).forEach((key) => {
                 if (newVal[key].planetId == this.props.planetName && !this.state.noteList.includes(newVal[key])) {
-                    this.state.noteList.push(newVal[key])
+                    tempNoteList.push(newVal[key])
                 }
             })
 
             this.setState({
-                noteList: this.state.noteList,
+                noteList: tempNoteList,
             })
         })
+    }
+
+    componentWillMount() {
+
     }
 
     componentWillUpdate() {

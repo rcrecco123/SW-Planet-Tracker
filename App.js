@@ -59,8 +59,8 @@ export default class App extends React.Component {
 }
 
 const PlanetStack = createStackNavigator({
-  Main: { screen: Main },
   Login: { screen: Login },
+  Main: { screen: Main },
   Details: { screen: PlanetShow }
 })
 
