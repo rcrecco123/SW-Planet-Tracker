@@ -16,7 +16,7 @@ export default class PlanetShow extends React.Component {
     render() {
         return (
             <View style={{ backgroundColor: "gray", height: "100%" }}>
-                <Text style={{ padding: 10, fontSize: 20 }}>Planet Name: {this.props.navigation.state.params.planetName}</Text>
+                <Text style={{ padding: 10, fontSize: 35, textAlign: 'center' }}>{this.props.navigation.state.params.planetName}</Text>
                 <Text style={{ padding: 10, fontSize: 20 }}>Climate: {this.props.navigation.state.params.planetData.climate}</Text>
                 <Text style={{ padding: 10, fontSize: 20 }}>Diameter: {this.props.navigation.state.params.planetData.diameter}</Text>
                 <Text style={{ padding: 10, fontSize: 20 }}>Orbital Period: {this.props.navigation.state.params.planetData.orbital_period}</Text>

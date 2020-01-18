@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Button } from "react-native";
 import { TextInput } from "react-native";
 import * as firebase from "firebase";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default class PlanetNote extends React.Component {
     constructor(props) {
@@ -35,25 +36,30 @@ export default class PlanetNote extends React.Component {
     render() {
         return (
             <View>
-                <TextInput placeholder={"note title"}
-                    onChangeText={(input) => {
-                        this.setState({
-                            noteName: input.toString()
-                        })
-                    }}
-                />
-                <TextInput placeholder={"type a note!"}
-                    onChangeText={(input) => {
-                        this.setState({
-                            note: input.toString()
-                        })
-                    }}
-                    style={{ height: 140, backgroundColor: 'azure', fontSize: 20, textAlign: "auto" }}
-                    numberOfLines={10}
-                    multiline={true} />
-                <Button
-                    title="submit note"
-                    onPress={() => this.addNote()} />
+                <View style={{ borderColor: 'black', borderWidth: 1, marginBottom: 1 }}>
+                    <TextInput placeholder="note title"
+                        style={{ backgroundColor: 'azure' }}
+                        onChangeText={(input) => {
+                            this.setState({
+                                noteName: input.toString()
+                            })
+                        }}
+                    />
+                </View>
+                <View style={{ borderColor: 'black', borderWidth: 1 }}>
+                    <TextInput placeholder="type a note!"
+                        onChangeText={(input) => {
+                            this.setState({
+                                note: input.toString()
+                            })
+                        }}
+                        style={{ height: 140, backgroundColor: 'azure', fontSize: 20, textAlign: "auto" }}
+                        numberOfLines={10}
+                        multiline={true} />
+                </View>
+                <TouchableOpacity onPress={() => this.addNote()} >
+                    <Text style={{ textAlign: 'center', borderColor: 'black', borderWidth: 1 }}>submit note!</Text>
+                </TouchableOpacity>
             </View>
         )
     }

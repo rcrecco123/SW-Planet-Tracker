@@ -16,7 +16,7 @@ class Main extends React.Component {
         }
 
         this.searchSwDb = this.searchSwDb.bind(this)
-
+        this.handleSignout = this.handleSignout.bind(this)
     }
 
     updateSearch = search => {
@@ -55,6 +55,14 @@ class Main extends React.Component {
         }
     }
 
+    handleSignout() {
+        firebase.auth().signOut().then(() => {
+            this.props.navigation.navigate('Login')
+        }).catch(function (error) {
+            // An error happened.
+        });
+    }
+
 
     render() {
         const search = this.state.search;
@@ -71,6 +79,10 @@ class Main extends React.Component {
             return (
                 <View style={{ backgroundColor: 'gray', height: "100%" }}>
                     <Text style={{ textAlign: "center" }}>Welcome {firebase.auth().currentUser.email}</Text>
+                    <Button onPress={() => {
+                        this.handleSignout()
+                    }}
+                        title="sign out" />
                     <SearchBar
                         platform="ios"
                         placeholder="Type here..."

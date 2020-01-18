@@ -43,10 +43,17 @@ export default class App extends React.Component {
         console.log('user logged')
       }
     });
+
   }
 
   componentDidMount() {
-
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (!user) {
+        () => this.props.navigation.navigate('Login', { planetName: item.name, planetData: item })
+      } else {
+        () => this.props.navigation.navigate('Main');
+      }
+    });
   }
 
   componentDidUpdate() {
@@ -54,7 +61,9 @@ export default class App extends React.Component {
   }
 
   render() {
-    return <AppContainer />;
+    return (
+      <AppContainer />
+    )
   }
 }
 
