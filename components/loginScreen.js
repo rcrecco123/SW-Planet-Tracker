@@ -20,13 +20,11 @@ export default class Login extends React.Component {
     loginUser(email, password) {
         try {
             firebase.auth().signInWithEmailAndPassword(email, password)
-                .then(res => {
-                    console.log(res.user.email)
-                }).then(() => this.props.navigation.navigate('Main'))
-        }
-
-        catch (error) {
-            console.log(error.toString());
+                .then(() => this.props.navigation.navigate('Main')).catch(error => {
+                    alert(error.message)
+                })
+        } catch (error) {
+            alert("Error: ", error);
         }
 
         this.props.navigation.navigate('Main');
@@ -41,7 +39,9 @@ export default class Login extends React.Component {
             }
             firebase.auth().createUserWithEmailAndPassword(email, password)
                 .then(() => this.submitDbInfo())
-                .then(() => this.props.navigation.navigate('Main'))
+                .then(() => this.props.navigation.navigate('Main')).catch(error => {
+                    alert(error.message)
+                })
         }
 
         catch (error) {
@@ -65,7 +65,6 @@ export default class Login extends React.Component {
 
     render() {
         return (
-
             <Container>
                 <Text style={{ textAlign: "center", padding: 15, fontSize: 65 }}>Star Wars Planet Tracker</Text>
                 <Text style={{ textAlign: "center", fontSize: 20, paddingTop: 10 }}>Galaxy Compendium</Text>
