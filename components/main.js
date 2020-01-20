@@ -44,6 +44,12 @@ class Main extends React.Component {
             })
     }
 
+    componentWillMount() {
+        if (!firebase.auth().currentUser) {
+            () => { this.props.navigation.navigate('Login') }
+        }
+    }
+
     componentDidMount() {
         this.searchSwDb()
         this.setState({ componentDidMount: true })

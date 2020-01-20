@@ -19,6 +19,14 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+const PlanetStack = createStackNavigator({
+  Login: { screen: Login },
+  Main: { screen: Main },
+  Details: { screen: PlanetShow }
+})
+
+const AppContainer = createAppContainer(PlanetStack);
+
 firebase.auth().onAuthStateChanged(function (user) {
   if (!user) {
     () => this.props.navigation.navigate('Login', { planetName: item.name, planetData: item })
@@ -41,6 +49,14 @@ export default class App extends React.Component {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         console.log('user logged')
+      }
+    });
+
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (!user) {
+        () => this.props.navigation.navigate('Login', { planetName: item.name, planetData: item })
+      } else {
+        () => this.props.navigation.navigate('Main');
       }
     });
 
@@ -67,12 +83,6 @@ export default class App extends React.Component {
   }
 }
 
-const PlanetStack = createStackNavigator({
-  Login: { screen: Login },
-  Main: { screen: Main },
-  Details: { screen: PlanetShow }
-})
 
-const AppContainer = createAppContainer(PlanetStack);
 
 

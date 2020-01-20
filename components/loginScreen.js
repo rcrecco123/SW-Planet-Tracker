@@ -26,9 +26,6 @@ export default class Login extends React.Component {
         } catch (error) {
             alert("Error: ", error);
         }
-
-        this.props.navigation.navigate('Main');
-
     }
 
     signUp(email, password) {

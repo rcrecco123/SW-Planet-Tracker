@@ -21,11 +21,13 @@ export default class NoteList extends React.Component {
             let tempNoteList = []
             this.state.noteList = [];
 
-            Object.keys(newVal).forEach((key) => {
-                if (newVal[key].planetId == this.props.planetName && !this.state.noteList.includes(newVal[key])) {
-                    tempNoteList.push(newVal[key])
-                }
-            })
+            if (Object.keys(newVal)) {
+                Object.keys(newVal).forEach((key) => {
+                    if (newVal[key].planetId == this.props.planetName && !this.state.noteList.includes(newVal[key])) {
+                        tempNoteList.push(newVal[key])
+                    }
+                })
+            }
 
             this.setState({
                 noteList: tempNoteList,
