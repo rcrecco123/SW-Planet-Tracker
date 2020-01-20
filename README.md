@@ -1,3 +1,3 @@
 # SW-Planet-Tracker
 
-![one](https://imgur.com/UAwOla6)
+[Imgur](https://imgur.com/UAwOla6)
